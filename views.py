@@ -1,23 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from counters import Counters
+from metrix.counters import Counters
+# Create your views here.
+import random
+
+c = Counters("app1", "counter1")
+
+d = Counters("app2", "counters2")
+
+for i in range(100):
+    c.increment_by(random.randint(1,10))
+    d.increment()
 
 
-c = Counters("a")
-c.increment_by(15)
 
-d = Counters("d")
-d.increment()
 
-def index(request):
-
-        response = ""
-        if len(Counters) == 0:
-            request = "*No counters initialized*"
-
-        else:
-            for c in Counters:
-                response = response + c.get_name() +"="+str(c.get_value())
-                response += "<br \>"
-        
-        return HttpResponse(response)
