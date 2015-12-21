@@ -7,13 +7,18 @@ import glob
 
 def index(request):
         
+        #Opens all the Counter files
         f_list = glob.glob("/tmp/Counter_*")
         response = ""
 
+        
         if len(f_list) == 0:
             response = "*No counters initialized*"
 
         else:
+
+            # iterate through all files, get app_name and counter_name from 
+            # file_name and get all the counter values from the files
             for f in f_list:
                 file_temp = open(f, "r")
 

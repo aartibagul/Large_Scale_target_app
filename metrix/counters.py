@@ -1,29 +1,12 @@
-''' 
-http://stackoverflow.com/questions/739882/iterating-over-object-instances-of-a-given-class-in-python
-'''
-'''
-class Iter_Registry(type):
-    def __iter__(cls):
-        return iter(_registry)
-
-    def __len__(cls):
-        return len(_registry)
-
-    #def __getitem__(cls,val):
-    #    return cls._registry[val]
-
-'''
-
 import datetime
 
 class Counters:
     
-    #__metaclass__ = Iter_Registry
-    #_registry = []
 
     def __init__(self, app_name, counter_name):
-        #_registry.append(self)
-        #print(len(_registry))
+        
+
+        #creates a file Counter_appname_countername and stores a value of 0
         self.file_name = "/tmp/Counter_"+ app_name + "_" + counter_name 
         f = open(self.file_name, "w+")
         to_write= "_0&"+ str(datetime.datetime.now())
@@ -36,18 +19,18 @@ class Counters:
 
 
     def increment(self):
+        # increments counter value by one and saves it to a file
         self.value += 1
-        
-        
+
         f = open(self.file_name, "a")
         to_write = "_" + str(self.value)+ "&"+ str(datetime.datetime.now())
-
-        
+    
         f.write(to_write)
         f.close()
 
     def increment_by(self, value):
-       
+        # increments counter by value and saves it to a file
+
         self.value += value
         f = open(self.file_name, "a")
         to_write = "_" + str(self.value)+"&"+ str(datetime.datetime.now()) 
